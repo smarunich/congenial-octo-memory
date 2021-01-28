@@ -1,0 +1,21 @@
+#cloud-config
+users:
+  - default
+  - name: octoadmin
+    gecos: octo Administrator
+    lock_passwd: true
+    shell: /bin/bash
+    sudo: ALL=(ALL) NOPASSWD:ALL
+    ssh_authorized_keys:
+      - ${public_key}
+
+write_files:
+  - content: |
+      #!/bin/sh
+      export PS1='\D{%c} \w\n[\u@\H:${instance_name}]$ '
+    path: /etc/profile.d/custom_prompt.sh
+    permissions: 0755
+  - content: |
+      ${octo_cluster_uuid}
+    path: /tmp/octo_cluster_uuid
+    permissions: 0755

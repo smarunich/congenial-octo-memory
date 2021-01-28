@@ -1,0 +1,12 @@
+# Example build
+# AWS_CREDENTIALS_DIR=~/.aws/ docker-compose run --rm octo-orchestrator
+
+version: "3.8"
+services:
+  octo-orchestrator:
+    image: octo-orchestrator:master
+    ports:
+      - 8000:8000
+    volumes:
+      - ~/.aws/:/root/.aws/
+      - /opt/:/opt/host/
